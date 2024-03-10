@@ -1,8 +1,4 @@
 <?php
-
-$siteToScrape = 'https://www.hotnews.ro/sitemap-recent.xml';
-$links = getLinkScrape($siteToScrape);
-
 function getLinkScrape($siteToScrape) {
     $xmlContent = file_get_contents($siteToScrape);
     if ($xmlContent === false) { return 'We cannot access XML'; }
