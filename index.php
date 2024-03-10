@@ -19,6 +19,7 @@ $output = "";
 foreach ($links as $index => $link) {
     $date = processLinkContent($link['URL']);
     $articleBodyContent = processContentArticleBody($link['URL']);
+    $articleBodyContent = str_replace("\n", " ", $articleBodyContent); // Replace with a space
     $articleBodyContent = htmlspecialchars($articleBodyContent, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
     $output .= ($index + 1) . ": " . "<br>" . 
@@ -29,11 +30,12 @@ foreach ($links as $index => $link) {
                "<span>Article Body:</span>" . $articleBodyContent . "<br><br>";
 }
 
-$jsonOutput = json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+$jsonOutput = json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 $file = 'output.json';
+
 file_put_contents($file, $jsonOutput);
 
-echo $output;
+echo $jsonOutput;
 ?>
 </body>
 </html>
